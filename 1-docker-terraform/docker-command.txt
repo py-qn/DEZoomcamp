@@ -3,10 +3,11 @@ docker build -t taxi_ingest:homework .
 
 #run docker script  
 docker run -it \
-    taxi_ingest:homework \
+    --network=zoomcamp_default \
+     taxi_ingest:homework \
     --user=root \
     --password=root \
-    --host=localhost \
+    --host=pgdatabase \
     --port=5432 \
     --db=ny_taxi \
      --table_name=green_tripdata \
