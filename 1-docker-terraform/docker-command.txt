@@ -6,7 +6,7 @@ docker run -it \
     taxi_ingest:homework \
     --user=root \
     --password=root \
-    --host=pgdatabase \
+    --host=localhost \
     --port=5432 \
     --db=ny_taxi \
      --table_name=green_tripdata \
