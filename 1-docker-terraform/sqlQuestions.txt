@@ -1,0 +1,41 @@
+#Question 3. Count records
+SELECT
+  COUNT(1)
+FROM
+  public.green_tripdata
+WHERE
+  lpep_pickup_datetime::date = '2019-09-18';
+
+#Question 4. Longest trip for each day
+SELECT Cast(lpep_pickup_datetime AS Date) as "day",
+MAX(trip_distance) max_trip
+FROM public.green_tripdata
+GROUP BY 1
+ORDER BY max_trip DESC;
+
+#Question 5. Three biggest pick up Boroughs
+SELECT SUM(g.total_amount) as max_total, z."Borough"
+FROM public.green_tripdata g
+INNER JOIN zones z
+ON g."PULocationID" = z."LocationID"
+WHERE DATE(g.lpep_pickup_datetime) = '2019-09-18'
+GROUP BY z."Borough"
+HAVING z."Borough" != 'Unknown' AND SUM(g.total_amount) > 50000
+ORDER BY max_total DESC;
+
+
+#Question 6. Largest tip
+SELECT
+    CONCAT(zpu."Zone", '/', zdo."Zone") AS "zone_pair",
+    t."tip_amount"
+FROM
+    public.green_tripdata t 
+JOIN 
+    public.zones zpu ON t."PULocationID" = zpu."LocationID"
+JOIN 
+    public.zones zdo ON t."DOLocationID" = zdo."LocationID"
+WHERE 
+    zpu."Zone" = 'Astoria'
+ORDER BY
+    t."tip_amount" DESC;
+
