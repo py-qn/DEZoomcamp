@@ -31,7 +31,6 @@ def load_data_from_api(*args, **kwargs):
         'congestion_surcharge': 'float64'
     }
 
-
     green_taxi_df = []
 
     # Load data for the final quarter of 2020 (months 10, 11, 12) from URLs
@@ -42,10 +41,7 @@ def load_data_from_api(*args, **kwargs):
 
     # Concatenate data for the final three months
     final_df = pd.concat(green_taxi_df, ignore_index=True)
-
-
-
-
+    
     return final_df
 
 
